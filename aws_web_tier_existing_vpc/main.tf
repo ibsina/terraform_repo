@@ -13,6 +13,7 @@ provider "aws" {
   profile = var.profile_name
 }
 
+/*
 # Create a VPC
 resource "aws_vpc" "app_vpc" {
   cidr_block = var.vpc_cidr
@@ -58,6 +59,7 @@ resource "aws_route_table_association" "public_rt_asso" {
   subnet_id      = aws_subnet.public_subnet.id
   route_table_id = aws_route_table.public_rt.id
 }
+*/
 
 resource "aws_instance" "web" {
   ami           = "ami-0d70546e43a941d70" 
