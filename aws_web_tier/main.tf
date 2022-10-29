@@ -75,11 +75,11 @@ resource "aws_instance" "web" {
   EOF
 
   tags = {
-    Name = "web_instance"
+    Name = "web_instance_1"
   }
 
   volume_tags = {
-    Name = "web_instance"
+    Name = "web_instance_1"
   } 
 }
 
