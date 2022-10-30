@@ -73,7 +73,7 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "tgw-att-kbz-ftp1" {
 
 resource "aws_instance" "kbz-ftp1" {
   ami           = "ami-0a46ef2b5534a90d6" 
-  instance_type = var.instance_type
+  instance_type = "m5.large"
   key_name = var.instance_key
   subnet_id              = aws_subnet.public_subnet.id
   security_groups = [aws_security_group.sg.id]
