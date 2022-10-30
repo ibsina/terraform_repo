@@ -87,7 +87,7 @@ resource "aws_instance" "kbz-ftp2" {
   EOF
   ebs_block_device {
     device_name           = "/dev/sda1"
-    volume_size           = "100"
+    volume_size           = "150"
     volume_type           = "gp2"
     encrypted             = true
     delete_on_termination = true
