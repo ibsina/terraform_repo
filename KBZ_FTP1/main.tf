@@ -60,9 +60,9 @@ resource "aws_route_table_association" "public_rt_asso" {
 }
 
 # Attachment to TGW
-resource "aws_ec2_transit_gateway_vpc_attachment" "tgw-att-mgmt" {
+resource "aws_ec2_transit_gateway_vpc_attachment" "tgw-att-kbz-ftp1" {
   subnet_ids                                      = [aws_subnet.public_subnet.id]
-  transit_gateway_id                              = tgw-017d8f02a13008cc3
+  transit_gateway_id                              = [tgw-017d8f02a13008cc3]
   vpc_id                                          = aws_vpc.app_vpc.id
   transit_gateway_default_route_table_association = false
   transit_gateway_default_route_table_propagation = false
