@@ -82,7 +82,7 @@ resource "aws_instance" "web" {
     Name = "web_instance_1"
   } 
 }
-resource "aws_instance" "web" {
+resource "aws_instance" "web2" {
   ami           = "ami-0a46ef2b5534a90d6" 
   instance_type = var.instance_type
   key_name = var.instance_key
