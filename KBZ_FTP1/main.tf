@@ -86,6 +86,14 @@ resource "aws_instance" "kbz-ftp1" {
   echo "*** Completed Installing apache2"
   EOF
 
+  ebs_block_device {
+    device_name           = "/dev/xvda"
+    volume_size           = "100"
+    volume_type           = "gp2"
+    encrypted             = true
+    delete_on_termination = true
+  }
+
   tags = {
     Name = "kbz-ftp1"
   }
@@ -104,7 +112,7 @@ resource "aws_instance" "linux_pcap1" {
   # data disk
   ebs_block_device {
     device_name           = "/dev/xvda"
-    volume_size           = "50"
+    volume_size           = "100"
     volume_type           = "gp2"
     encrypted             = true
     delete_on_termination = true
