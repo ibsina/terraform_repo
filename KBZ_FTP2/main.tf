@@ -109,7 +109,7 @@ resource "aws_instance" "linux_pcap2" {
     delete_on_termination = true
   }
   tags = {
-    Name = "linux-pcap2"
+    Name = "linux-pcap2-dump"
   }
 
   volume_tags = {
