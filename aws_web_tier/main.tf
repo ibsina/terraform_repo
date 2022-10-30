@@ -82,27 +82,27 @@ resource "aws_instance" "web" {
     Name = "web_instance_1"
   } 
 }
-resource "aws_instance" "web2" {
-  ami           = "ami-0a46ef2b5534a90d6" 
+resource "aws_instance" "aws_linux2" {
+  ami           = "ami-094bbd9e922dc515d" 
   instance_type = var.instance_type
   key_name = var.instance_key
   subnet_id              = aws_subnet.public_subnet.id
   security_groups = [aws_security_group.sg.id]
-
-  user_data = <<-EOF
-  #!/bin/bash
-  echo "*** Installing apache2"
-  sudo apt update -y
-  sudo apt install apache2 -y
-  echo "*** Completed Installing apache2"
-  EOF
-
+ 
+  # data disk
+  ebs_block_device {
+    device_name           = "/dev/xvda"
+    volume_size           = "50"
+    volume_type           = "gp2"
+    encrypted             = true
+    delete_on_termination = true
+  }
   tags = {
-    Name = "web_instance_2"
+    Name = "aws_linux"
   }
 
   volume_tags = {
-    Name = "web_instance_2"
+    Name = "aws_linux"
   } 
 }
 
