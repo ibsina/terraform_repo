@@ -1,3 +1,3 @@
 output "web_instance_ip" {
-    value = aws_instance.kbz-ftp2.public_ip
+    value = aws_instance.native_linux.public_ip
 }
