@@ -14,24 +14,24 @@ provider "aws" {
 }
 
 # Create a VPC
-resource "aws_vpc" "app_vpc" {
+resource "aws_vpc" "web_vpc" {
   cidr_block = var.vpc_cidr
 
   tags = {
-    Name = "app-vpc"
+    Name = "web-vpc"
   }
 }
 
 resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.app_vpc.id
+  vpc_id = aws_vpc.web_vpc.id
 
   tags = {
-    Name = "vpc_igw"
+    Name = "web_igw"
   }
 }
 
 resource "aws_subnet" "public_subnet" {
-  vpc_id            = aws_vpc.app_vpc.id
+  vpc_id            = aws_vpc.web_vpc.id
   cidr_block        = var.public_subnet_cidr
   map_public_ip_on_launch = true
   availability_zone = "ap-southeast-1a"
@@ -42,7 +42,7 @@ resource "aws_subnet" "public_subnet" {
 }
 
 resource "aws_route_table" "public_rt" {
-  vpc_id = aws_vpc.app_vpc.id
+  vpc_id = aws_vpc.web_vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -83,7 +83,7 @@ resource "aws_instance" "web" {
   } 
 }
 resource "aws_instance" "aws_linux2" {
-  ami           = "ami-094bbd9e922dc515d" 
+  ami           = "ami-0e72449bd9c509cf3" 
   instance_type = var.instance_type
   key_name = var.instance_key
   subnet_id              = aws_subnet.public_subnet.id
