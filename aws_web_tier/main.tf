@@ -46,18 +46,35 @@ resource "aws_route_table" "public_rt" {
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.igw.id
+    /* gateway_id = aws_internet_gateway.igw.id */
+    transit_gateway_id = "tgw-017d8f02a13008cc3"
   }
 
   tags = {
     Name = "public_rt"
   }
+  
+  depends_on = [tgw-att-web-tier]
 }
 
 resource "aws_route_table_association" "public_rt_asso" {
   subnet_id      = aws_subnet.public_subnet.id
   route_table_id = aws_route_table.public_rt.id
 }
+
+
+# Attachment to TGW
+resource "aws_ec2_transit_gateway_vpc_attachment" "tgw-att-web-tier" {
+  subnet_ids                                      = [aws_subnet.public_subnet.id]
+  transit_gateway_id                              = "tgw-017d8f02a13008cc3"
+  vpc_id                                          = aws_vpc.web_vpc.id
+  transit_gateway_default_route_table_association = false
+  transit_gateway_default_route_table_propagation = false
+  tags = {
+    Name     = "tgw-att-web-tier"
+  }
+}
+
 
 resource "aws_instance" "web" {
   ami           = "ami-0a46ef2b5534a90d6" 

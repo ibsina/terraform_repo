@@ -11,8 +11,8 @@ variable "instance_key" {
 default = "fgt_sg"
 }
 variable "vpc_cidr" {
-default = "10.220.10.0/24"
+default = "10.220.11.0/24"
 }
 variable "public_subnet_cidr" {
-default = "10.220.10.0/27"
+default = "10.220.11.0/27"
 }
