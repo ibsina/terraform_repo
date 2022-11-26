@@ -1,0 +1,6 @@
+region =  "ap-southeast-1"
+instance_type = "t2.micro"
+instance_key = "fgt_sg"
+vpc_cidr = "10.205.0.0/16"
+public_subnet_cidr = "10.205.10.0/24"
+profile_name = "default"
