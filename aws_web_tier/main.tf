@@ -90,11 +90,12 @@ resource "aws_instance" "web" {
   EOF
 
   tags = {
-    Name = "web_instance_1"
+    Name = "Sales"
+    Group = "Sales"
   }
 
   volume_tags = {
-    Name = "web_instance_1"
+    Name = "Sales"
   } 
 }
 resource "aws_instance" "aws_linux2" {
@@ -113,11 +114,12 @@ resource "aws_instance" "aws_linux2" {
     delete_on_termination = true
   }
   tags = {
-    Name = "aws_linux"
+    Name = "Marketing"
+    Group = "Marketing"
   }
 
   volume_tags = {
-    Name = "aws_linux"
+    Name = "Marketing"
   } 
 }
 
