@@ -18,7 +18,7 @@ resource "aws_vpc" "web_vpc" {
   cidr_block = var.vpc_cidr
 
   tags = {
-    Name = "web-vpc"
+    Name = "seahk-is-cbc-web-vpc"
   }
 }
 
