@@ -53,8 +53,6 @@ resource "aws_route_table" "public_rt" {
   tags = {
     Name = "public_rt"
   }
-  
-  depends_on = [tgw-att-web-tier]
 }
 
 resource "aws_route_table_association" "public_rt_asso" {
