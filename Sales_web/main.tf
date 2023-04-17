@@ -49,7 +49,7 @@ resource "aws_route_table" "public_rt" {
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = transit_gateway_id
+    transit_gateway_id = "tgw-017d8f02a13008cc3"
   }
 
   tags = {
