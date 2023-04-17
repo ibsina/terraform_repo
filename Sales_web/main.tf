@@ -94,26 +94,3 @@ resource "aws_instance" "sales-vm" {
     Dept = "Sales"
   }
 }
-
-resource "aws_instance" "sales2-vm" {
-  ami           = "ami-0a46ef2b5534a90d6" 
-  instance_type = "t2.micro"
-  key_name = var.instance_key
-  subnet_id = aws_subnet.public_subnet.id
-  associate_public_ip_address = false
-  security_groups = [aws_security_group.sg.id]
-
-  user_data = <<-EOF
-  #!/bin/bash
-  echo "*** Installing apache2"
-  sudo apt update -y
-  sudo apt install apache2 -y
-  echo "*** Completed Installing apache2"
-  EOF
-  
-  tags = {
-    Name = "seahk-is-sales2-vm"
-    Dept = "Sales"
-  }
-}
-
