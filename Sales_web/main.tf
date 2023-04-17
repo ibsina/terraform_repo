@@ -45,7 +45,6 @@ resource "aws_subnet" "public_subnet" {
 
 resource "aws_route_table" "public_rt" {
   vpc_id = aws_vpc.app_vpc.id
-  transit_gateway_id = "tgw-017d8f02a13008cc3"
 
   route {
     cidr_block = "0.0.0.0/0"
