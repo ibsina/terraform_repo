@@ -78,6 +78,7 @@ resource "aws_instance" "finance-vm" {
   instance_type = "t2.micro"
   key_name = var.instance_key
   subnet_id = aws_subnet.public_subnet.id
+  associate_public_ip_address = false
   security_groups = [aws_security_group.sg.id]
 
   user_data = <<-EOF
