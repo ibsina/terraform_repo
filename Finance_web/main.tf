@@ -74,7 +74,7 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "tgw-att-finance" {
 }
 
 resource "aws_instance" "finance-vm" {
-  ami           = "ami-0a46ef2b5534a90d6" 
+  ami           = "ami-0897e52631bdc5634" 
   instance_type = "t2.micro"
   key_name = var.instance_key
   subnet_id = aws_subnet.public_subnet.id
@@ -96,3 +96,25 @@ resource "aws_instance" "finance-vm" {
   }
 }
 
+resource "aws_instance" "BAD-finance-vm" {
+  ami           = "ami-04453454e335e779c" 
+  instance_type = "t2.micro"
+  key_name = var.instance_key
+  subnet_id = aws_subnet.public_subnet.id
+  associate_public_ip_address = false
+  security_groups = [aws_security_group.sg.id]
+
+  user_data = <<-EOF
+  #!/bin/bash
+  echo "*** Installing apache2"
+  sudo apt update -y
+  sudo apt install apache2 -y
+  echo "*** Completed Installing apache2"
+  EOF
+  
+  tags = {
+    Name = "seahk-is-Bad-finance-vm"
+    Dept = "Finance"
+    Tier = "WEB"
+  }
+}
