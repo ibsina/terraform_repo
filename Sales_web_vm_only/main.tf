@@ -78,7 +78,7 @@ resource "aws_instance" "sales-vm" {
   ami           = "ami-0a46ef2b5534a90d6" 
   instance_type = "t2.micro"
   key_name = var.instance_key
-  subnet_id = "subnet-062c2199c02517e55"
+  subnet_id = "subnet-0878d6bb103baf68c"
   security_groups = [aws_security_group.sg.id]
 
   user_data = <<-EOF
@@ -90,7 +90,7 @@ resource "aws_instance" "sales-vm" {
   EOF
   
   tags = {
-    Name = "seahk-is-sales2-vm"
+    Name = "seahk-is-sales3-vm"
     Dept = "Sales"
     Tier = "WEB"
   }
