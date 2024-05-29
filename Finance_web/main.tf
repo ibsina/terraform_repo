@@ -92,6 +92,7 @@ resource "aws_instance" "finance-vm" {
   tags = {
     Name = "seahk-is-finance-vm"
     Dept = "Finance"
+    Tier = "WEB"
   }
 }
 
