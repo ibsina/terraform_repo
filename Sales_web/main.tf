@@ -62,15 +62,25 @@ resource "aws_route_table_association" "public_rt_asso" {
 }
 
 # Attachment to TGW
-resource "aws_ec2_transit_gateway_vpc_attachment" "tgw-att-sales" {
+resource "aws_ec2_transit_gateway_vpc_attachment" "tgw-att-app" {
   subnet_ids                                      = [aws_subnet.public_subnet.id]
   transit_gateway_id                              = "tgw-017d8f02a13008cc3"
   vpc_id                                          = aws_vpc.app_vpc.id
   transit_gateway_default_route_table_association = false
   transit_gateway_default_route_table_propagation = false
   tags = {
-    Name     = "tgw-att-sales"
+    Name     = "tgw-att-App1"
   }
+}
+
+resource "aws_ec2_transit_gateway_route_table_association" "example" {
+  transit_gateway_attachment_id = aws_ec2_transit_gateway_vpc_attachment.tgw_att_app.id
+  transit_gateway_route_table_id = "tgw-rtb-0f83f3b5c2f360032"
+}
+
+resource "aws_ec2_transit_gateway_route_table_propagation" "example" {
+  transit_gateway_attachment_id = aws_ec2_transit_gateway_vpc_attachment.tgw_att_app.id
+  transit_gateway_route_table_id = "tgw-rtb-03b73e7ca6b16fc1b"
 }
 
 resource "aws_instance" "sales-vm" {
