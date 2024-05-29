@@ -18,7 +18,7 @@ resource "aws_vpc" "app_vpc" {
   cidr_block = var.vpc_cidr
 
   tags = {
-    Name = "seahk-is-finance-vpc"
+    Name = "seahk-is-APP2-vpc"
   }
 }
 
@@ -74,7 +74,7 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "tgw-att-finance" {
 }
 
 resource "aws_instance" "finance-vm" {
-  ami           = "ami-0897e52631bdc5634" 
+  ami           = "ami-0320bcb56016e2c87" 
   instance_type = "t2.micro"
   key_name = var.instance_key
   subnet_id = aws_subnet.public_subnet.id
@@ -97,7 +97,7 @@ resource "aws_instance" "finance-vm" {
 }
 
 resource "aws_instance" "BAD-finance-vm" {
-  ami           = "ami-04453454e335e779c" 
+  ami           = "ami-0320bcb56016e2c87" 
   instance_type = "t2.micro"
   key_name = var.instance_key
   subnet_id = aws_subnet.public_subnet.id
@@ -116,5 +116,6 @@ resource "aws_instance" "BAD-finance-vm" {
     Name = "seahk-is-Bad-finance-vm"
     Dept = "Finance"
     Tier = "WEB"
+    secured = "NO"
   }
 }
