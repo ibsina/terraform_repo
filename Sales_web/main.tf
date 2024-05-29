@@ -92,6 +92,7 @@ resource "aws_instance" "sales-vm" {
   tags = {
     Name = "seahk-is-sales-vm"
     Dept = "Sales"
+    Tier = "WEB"
   }
 }
 /*

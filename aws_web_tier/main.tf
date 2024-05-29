@@ -116,6 +116,7 @@ resource "aws_instance" "aws_linux2" {
   tags = {
     Name = "Marketing"
     Group = "Marketing"
+    Tier = "WEB"
   }
 
   volume_tags = {
