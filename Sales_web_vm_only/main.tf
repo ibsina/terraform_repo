@@ -75,7 +75,7 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "tgw-att-sales" {
 
 */
 resource "aws_instance" "sales-vm" {
-  ami           = "ami-0a46ef2b5534a90d6" 
+  ami           = "ami-0c0c061ad2af1e06e" 
   instance_type = "t2.micro"
   key_name = var.instance_key
   subnet_id = "subnet-0878d6bb103baf68c"
