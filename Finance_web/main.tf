@@ -18,7 +18,7 @@ resource "aws_vpc" "app_vpc" {
   cidr_block = var.vpc_cidr
 
   tags = {
-    Name = "seahk-is-sales-vpc"
+    Name = "seahk-is-finance-vpc"
   }
 }
 
@@ -39,7 +39,7 @@ resource "aws_subnet" "public_subnet" {
   availability_zone = "ap-southeast-1a"
 
   tags = {
-    Name = "sales-public-subnet"
+    Name = "finance-public-subnet"
   }
 }
 
@@ -52,7 +52,7 @@ resource "aws_route_table" "public_rt" {
   }
 
   tags = {
-    Name = "sales-public_rt"
+    Name = "finance-public_rt"
   }
 }
 
@@ -62,18 +62,18 @@ resource "aws_route_table_association" "public_rt_asso" {
 }
 
 # Attachment to TGW
-resource "aws_ec2_transit_gateway_vpc_attachment" "tgw-att-sales" {
+resource "aws_ec2_transit_gateway_vpc_attachment" "tgw-att-finance" {
   subnet_ids                                      = [aws_subnet.public_subnet.id]
   transit_gateway_id                              = "tgw-017d8f02a13008cc3"
   vpc_id                                          = aws_vpc.app_vpc.id
   transit_gateway_default_route_table_association = false
   transit_gateway_default_route_table_propagation = false
   tags = {
-    Name     = "tgw-att-sales"
+    Name     = "tgw-att-finance"
   }
 }
 
-resource "aws_instance" "sales-vm" {
+resource "aws_instance" "finance-vm" {
   ami           = "ami-0a46ef2b5534a90d6" 
   instance_type = "t2.micro"
   key_name = var.instance_key
@@ -90,30 +90,8 @@ resource "aws_instance" "sales-vm" {
   EOF
   
   tags = {
-    Name = "seahk-is-sales-vm"
-    Dept = "Sales"
+    Name = "seahk-is-finance-vm"
+    Dept = "Finance"
   }
 }
-/*
-resource "aws_instance" "sales2-vm" {
-  ami           = "ami-0a46ef2b5534a90d6" 
-  instance_type = "t2.micro"
-  key_name = var.instance_key
-  subnet_id = aws_subnet.public_subnet.id
-  associate_public_ip_address = false
-  security_groups = [aws_security_group.sg.id]
 
-  user_data = <<-EOF
-  #!/bin/bash
-  echo "*** Installing apache2"
-  sudo apt update -y
-  sudo apt install apache2 -y
-  echo "*** Completed Installing apache2"
-  EOF
-  
-  tags = {
-    Name = "seahk-is-sales2-vm"
-    Dept = "Sales"
-  }
-}
-*/
