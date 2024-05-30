@@ -78,7 +78,7 @@ resource "aws_instance" "sales-vm" {
   ami           = "ami-0c0c061ad2af1e06e" 
   instance_type = "t2.micro"
   key_name = var.instance_key
-  subnet_id = "subnet-0878d6bb103baf68c"
+  subnet_id = "subnet-0f07fbc65a313e4cd"
   security_groups = [aws_security_group.sg.id]
 
   user_data = <<-EOF
