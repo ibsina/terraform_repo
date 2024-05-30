@@ -33,15 +33,13 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "tgw_attachment" {
   subnet_ids         = aws_subnet.subnet_tgw[*].id
   transit_gateway_id = "tgw-017d8f02a13008cc3"
   vpc_id             = aws_vpc.main.id
-
+  appliance_mode_support = "enable"
+  dns_support            = "enable"
+  ipv6_support           = "disable"
   transit_gateway_default_route_table_association = true
   transit_gateway_default_route_table_propagation = true
 
-  options {
-    appliance_mode_support = "enable"
-    dns_support            = "enable"
-    ipv6_support           = "disable"
-  }
+
 
   tags = {
     Name = "TGW Attachment"
