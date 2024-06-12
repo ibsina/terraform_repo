@@ -20,3 +20,7 @@ variable "security_group_name" {
   type = string
   default = "s4hana_security_group"
 }
+variable "ec2_name" {
+  type    = string
+  default = "s4hana-vm"
+}
