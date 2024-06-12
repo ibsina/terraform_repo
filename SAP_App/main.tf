@@ -1,7 +1,35 @@
+# Create a VPC
+resource "aws_vpc" "app_vpc" {
+  cidr_block = var.vpc_cidr
+
+  tags = {
+    Name = "SAP-APP1-vpc"
+  }
+}
+
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.app_vpc.id
+
+  tags = {
+    Name = "SAP-APP1_igw"
+  }
+}
+
+resource "aws_subnet" "public_subnet" {
+  vpc_id            = aws_vpc.app_vpc.id
+  cidr_block        = var.public_subnet_cidr
+  map_public_ip_on_launch = true
+  availability_zone = "ap-southeast-1a"
+
+  tags = {
+    Name = "SAP-APP1-public-subnet"
+  }
+}
+
 resource "aws_security_group" "security_group" {
   name        = var.security_group_name
   description = var.security_group_name
-  vpc_id      = "vpc-0d0d91192dd39889e"
+  vpc_id      = aws_vpc.app_vpc.id
 
   ingress {
     from_port   = 22
@@ -137,7 +165,7 @@ resource "aws_instance" "ec2_instance" {
   ami                    = data.aws_ami.ubuntu.id
   key_name               = var.instance_key
   vpc_security_group_ids = [aws_security_group.security_group.id]
-  subnet_id              = "subnet-0f07fbc65a313e4cd"
+  subnet_id              = aws_subnet.public_subnet.id
   user_data              = base64encode(templatefile("${path.module}/bootstrap.tftpl", {})) 
 
   tags = {
