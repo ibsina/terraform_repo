@@ -24,6 +24,3 @@ variable "ec2_name" {
   type    = string
   default = "s4hana-vm"
 }
-variable "profile_name" {
-default = "default"
-}
