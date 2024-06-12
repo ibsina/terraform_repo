@@ -16,3 +16,7 @@ default = "10.202.0.0/16"
 variable "public_subnet_cidr" {
 default = "10.202.0.0/24"
 }
+variable "security_group_name" {
+  type = string
+  default = "s4hana_security_group"
+}
